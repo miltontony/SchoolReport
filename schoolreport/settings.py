@@ -10,6 +10,8 @@ def abspath(*args):
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+AUTH_PROFILE_MODULE = "UserProfile"
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
