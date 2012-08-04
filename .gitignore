@@ -5,6 +5,7 @@
 *.html~
 .coverage
 /cover/
+/schoolreport/static/
 coverage.xml
 nosetests.xml
 *.log

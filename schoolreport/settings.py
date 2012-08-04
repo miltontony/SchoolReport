@@ -10,7 +10,9 @@ def abspath(*args):
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-AUTH_PROFILE_MODULE = "UserProfile"
+AUTH_PROFILE_MODULE = "schoolreport.UserProfile"
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -137,7 +139,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'schoolreport',
-    #'django.contrib.admin',
+    'django.contrib.admin',
 )
 
 # A sample logging configuration. The only tangible logging
