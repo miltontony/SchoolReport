@@ -1,3 +1,15 @@
+/ve/
+*.pyc
+*.py~
+*.db
+*.html~
+.coverage
+/cover/
+coverage.xml
+nosetests.xml
+*.log
+MANIFEST.in
+/*.egg-info/
 *.log
 *.pot
 *.pyc
