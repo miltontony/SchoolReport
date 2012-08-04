@@ -10,7 +10,9 @@ To get up and running locally::
     $ virtualenv --no-site-packages ve/
     $ source ve/bin/activate
     (ve)$ pip install -r requirements.pip
-    (ve)$ ./django-admin.py --syncdb
-    (ve)$ ./django-admin.py runserver
+    (ve)$ export DJANGO_SETTINGS_MODULE=schoolreport.settings
+    (ve)$ export PYTHONPATH=.
+    (ve)$ django-admin.py syncdb
+    (ve)$ django-admin.py runserver
 
 Good luck!
