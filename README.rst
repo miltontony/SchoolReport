@@ -13,6 +13,7 @@ To get up and running locally::
     (ve)$ export DJANGO_SETTINGS_MODULE=schoolreport.settings
     (ve)$ export PYTHONPATH=.
     (ve)$ django-admin.py syncdb
+    (ve)$ django-admin.py migrate schoolreport
     (ve)$ django-admin.py runserver
 
 Good luck!
