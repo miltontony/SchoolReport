@@ -11,9 +11,23 @@
 	<div class="span4 offset4">
     	<form class="content-form well" method="post">
     	<fieldset>
-    	    <label for="form-school">School ---This should be a series of drop downs---</label>
+    	    <label for="form-school">School</label>
     	    {% include "form_field_errors_snippet.html" with form_field=form.school %}
-    	    <input id="form-school" name="school" type="text" class="input-medium txt"/>
+            <select name="school">
+                <option value="100000031">ATLANTIC BEACH COLLEGE</option>
+                <option value="100000036">KNYSNA CHRISTIAN MISSION SCHOOL</option>
+                <option value="100000037">EAGLE'S NEST CHRISTIAN PRIM.</option>
+                <option value="100000038">SILVERMINE ACADEMY</option>
+                <option value="103008402">SHELANTI PRIVATE SCHOOL</option>
+                <option value="103008403">PHYLLIS JOWELL JEWISH DAY SCHOOL</option>
+                <option value="105008404">THE LEADERSHIP COLLEGE</option>
+                <option value="106008397">ZENZELENI SCHOOL FOR CREATIVE EDUCATION</option>
+                <option value="106008405">ST. MICHAELS PRIM.(KHAYELITSHA)</option>
+                <option value="19008399">BAY COLLEGE</option>
+                <option value="124008401">FOUNDATION CHRISTIAN SCHOOL</option>
+                <option value="132008406">DASSENBERG WALDORF SCHOOL</option>
+                <option value="140008400">BUFFELSRIVIER PRIVATE PRIM.</option>
+            </select>
     	    <label for="form-username">Mobile Number</label>
     	    {% include "form_field_errors_snippet.html" with form_field=form.username %}
     	    <input name="username" type="text" class="input-medium txt"/>
