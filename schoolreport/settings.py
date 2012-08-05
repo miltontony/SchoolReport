@@ -138,11 +138,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'schoolreport',
     'django.contrib.admin',
-    'south',
+    'schoolreport',
     'jmbocomments',
+    'schoolreport.comments',
+    'django.contrib.comments',
+    'south',
 )
+
+COMMENTS_APP = 'schoolreport.comments'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

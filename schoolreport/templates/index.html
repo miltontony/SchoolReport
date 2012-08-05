@@ -55,7 +55,7 @@
 
 <div id="pagination">
     {% if user_report_list.has_previous %}
-        <span><a href="{% url article_detail_redo article.pk user_report_list.previous_page_number %}">Previous</a></span> |
+        <span><a href="{% url home user_report_list.previous_page_number %}">Previous</a></span> |
     {% else %}
         <span>Previous</span> |
     {% endif %}
@@ -65,7 +65,7 @@
     </span>
 
     {% if user_report_list.has_next %}
-        | <span><a href="{% url article_detail_redo article.pk user_report_list.next_page_number %}">Next</a></span>
+        | <span><a href="{% url home user_report_list.next_page_number %}">Next</a></span>
     {% else %}
         | <span>Next</span>
     {% endif %}
@@ -87,15 +87,22 @@
             {{ form.timestamp }}
             {{ form.security_hash }}
             {{ form.honeypot }}
-            <input type="hidden" name="next" value="{{ school.get_absolute_url }}#user_report_list" />
+            <input type="hidden" name="next" value="{% url home %}#user_report_list" />
         </div>
 
         <p>
+            <label for="form-school">Category</label>
+            {% include "form_field_errors_snippet.html" with form_field=form.category %}
+            <select name="school">
+                <option value="0">Maintenance</option>
+                <option value="1">Abuse</option>
+                <option value="2">Textbooks</option>
+                <option value="3">Crime</option>
+                <option value="4">Bullying</option>
+            </select><br/>
             Write your report:
             <br/>
-            <div class="form-fields">
-            {{ form.comment }}
-            </div>
+            <textarea id="id_comment" rows="10" cols="40" name="comment" class="span12"></textarea>
         </p>
         <p>
             <input type="submit" name="post" value="Send" class="btn"/>
