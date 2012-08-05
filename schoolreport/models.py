@@ -7,33 +7,21 @@ class UserProfile(models.Model):
     user = models.OneToOneField('auth.User')
     school = models.TextField(default='')
 
-class SchoolStatus(models.Model):
-	name = models.CharField(max_length = 10)
-	
-class SchoolType(models.Model):
-	name = models.CharField(max_length = 20)
-	
-class Municipality(models.Model):
-	name = models.CharField(max_length = 100)
-	
-class District(models.Model):
-	name = models.CharField(max_length = 100)
-
 class School(models.Model):
 	emis = models.IntegerField(unique = True)
-	school_status = models.OneToOneField(SchoolStatus)
+	school_status = models.CharField(max_length=100)
 	name = models.CharField(max_length=100)
-	school_type = models.OneToOneField(SchoolType)
+	school_type = models.CharField(max_length=100)
 	section21 = models.BooleanField()
 	fee = models.IntegerField()
-	municipality = models.OneToOneField(Municipality)
+	municipality = models.CharField(max_length=100)
 	telephone = models.CharField(max_length = 30)
-	longitude = models.DecimalField(max_digits=10, decimal_places=7)
-	latitude = models.DecimalField(max_digits=10, decimal_places=7)
+	longitude = models.CharField(max_length=20)
+	latitude = models.CharField(max_length=20)
 	language = models.CharField(max_length = 20)
 	principal = models.CharField(max_length = 30)
 	physical_address = models.CharField(max_length = 255)
-	district = models.OneToOneField(District)
+	district = models.CharField(max_length=100)
 	
 
 

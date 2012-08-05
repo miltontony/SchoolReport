@@ -7,7 +7,3 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(School)
-admin.site.register(SchoolStatus)
-admin.site.register(SchoolType)
-admin.site.register(Municipality)
-admin.site.register(District)
