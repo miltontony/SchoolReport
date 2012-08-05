@@ -15,10 +15,11 @@
 </div>
 
 {% if user.is_authenticated %}
-<div id="user_report_list" class="comment_list">
+<div class="row">
+<div id="user_report_list" class="span12 comment_list">
     {% for user_report in user_report_list.object_list %}
-        <div class="comment {% cycle 'even' 'odd' %}">
-            <div>
+
+            <div class="well" style="margin:10px 0">
                 <!-- link to user profile -->
                             Anon.
                     <span class="subtext">
@@ -38,7 +39,7 @@
                 {% endif %}{% endspaceless %}
             </div>
 
-            <div>
+            <div >
                 <span class="likes">
                     {{ user_report.like_count }} Like{{ user_report.like_count|pluralize }}
                 </span>
@@ -53,12 +54,13 @@
                     </span>
                     {% endif %}
             </div>
-        </div>
+
     {% endfor %}
 </div>
-
+</div>
 <br/>
 
+<div class="well" style="padding: 5px">
 <div id="pagination">
     {% if user_report_list.has_previous %}
         <span><a href="{% url home user_report_list.previous_page_number %}">Previous</a></span> |
@@ -75,6 +77,7 @@
     {% else %}
         | <span>Next</span>
     {% endif %}
+</div>
 </div>
 
 
