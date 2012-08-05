@@ -1,27 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Join</h2>
-    <p>Join our network and improve your school.</p>
-    <form class="content-form" method="post">
-    <fieldset>
-        <label for="form-school">School ---This should be a series of drop downs---</label>
-        {% include "form_field_errors_snippet.html" with form_field=form.school %}
-        <input id="form-school" name="school" type="text" class="txt"/>
-
-        <label for="form-username">Mobile Number</label>
-        {% include "form_field_errors_snippet.html" with form_field=form.username %}
-        <input name="username" type="text" class="txt"/>
-        <label>PIN</label>
-        {% include "form_field_errors_snippet.html" with form_field=form.password1%}
-        <input name="password1" type="password" class="txt"/>
-        <label>Confirm PIN</label>
-        {% include "form_field_errors_snippet.html" with form_field=form.password2 %}
-        <input name="password2" type="password" class="txt"/>
-        <input type="submit" class="btn" value="Submit" name="submit" />
-        <input type="hidden" name="next" value="{{next}}">
-        {% csrf_token %}
-    </fieldset>
-    </form>
-    <div class="more"><a href="{% url login %}">Return to sign in</a></div>
+<div class="row">
+	<div class="span4 offset4">
+		<h2>Join</h2>
+		<p>Join our network and improve your school.</p>
+    </div>
+</div>
+<div class="row">
+	<div class="span4 offset4">
+    	<form class="content-form well" method="post">
+    	<fieldset>
+    	    <label for="form-school">School ---This should be a series of drop downs---</label>
+    	    {% include "form_field_errors_snippet.html" with form_field=form.school %}
+    	    <input id="form-school" name="school" type="text" class="input-medium txt"/>
+    	    <label for="form-username">Mobile Number</label>
+    	    {% include "form_field_errors_snippet.html" with form_field=form.username %}
+    	    <input name="username" type="text" class="input-medium txt"/>
+    	    <label>PIN</label>
+    	    {% include "form_field_errors_snippet.html" with form_field=form.password1%}
+    	    <input name="password1" type="password" class="input-medium txt"/>
+    	    <label>Confirm PIN</label>
+    	    {% include "form_field_errors_snippet.html" with form_field=form.password2 %}
+    	    <input name="password2" type="password" class="input-medium txt"/>
+    	    <input type="hidden" name="next" value="{{next}}">
+    	    <div class="form-actions">
+	    	    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+	    	    <button class="btn more"><a href="{% url login %}">Return to sign in</a></button>
+			</div>
+    	    {% csrf_token %}
+    	</fieldset>
+    	</form>
+    </div>
+</div>
+<div class="row">
+	<div class="span6">
+	</div>
+</div>
 {% endblock %}
