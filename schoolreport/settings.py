@@ -140,9 +140,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'schoolreport',
+    'django.contrib.comments',
     'jmbocomments',
     'schoolreport.comments',
-    'django.contrib.comments',
     'south',
 )
 

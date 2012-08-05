@@ -1,6 +1,5 @@
 from django.contrib import admin
 from schoolreport.models import *
-from schoolreport.comments.models import *
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -8,8 +7,3 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(School)
-admin.site.register(SchoolStatus)
-admin.site.register(SchoolType)
-admin.site.register(Municipality)
-admin.site.register(District)
-admin.site.register(UserReport)
