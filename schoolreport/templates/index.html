@@ -25,6 +25,7 @@
                     <span class="subtext">
                     - {{ user_report.submit_date|date:"D, j M Y, H:i" }}
                 </span>
+                :: {{user_report.get_category}}
             </div>
 
             <div>{% spaceless %}

@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage
 from schoolreport.models import School
-from schoolreport.comments.models import UserReport
 from jmbocomments.models import UserComment
 
 
