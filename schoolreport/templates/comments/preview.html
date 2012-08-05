@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load comments %}
+
+{% block content %}
+<div class="well" id="comment_form">
+    <form action="{% comment_form_target %}" method="post">
+        {% csrf_token %}
+        <div style="display:none;">
+            {{ form.content_type }}
+            {{ form.object_pk }}
+            {{ form.timestamp }}
+            {{ form.security_hash }}
+            {{ form.honeypot }}
+            <input type="hidden" name="next" value="{% url home %}#user_report_list" />
+        </div>
+
+        <p>
+            <label for="form-school">What do you want to report?</label>
+            {% include "form_field_errors_snippet.html" with form_field=form.category %}
+            <select name="category">
+                <option value="">Please choose an option</option>
+                <option value="0">Maintenance</option>
+                <option value="1">Abuse</option>
+                <option value="2">Textbooks</option>
+                <option value="3">Crime</option>
+                <option value="4">Bullying</option>
+            </select><br/>
+            Write your report:
+            <br/>
+            {% include "form_field_errors_snippet.html" with form_field=form.comment %}
+            <textarea id="id_comment" rows="4" name="comment" class="span11"></textarea>
+        </p>
+        <div class="form-actions">
+            <input type="submit" name="post" value="Post" class="btn btn-primary"/>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

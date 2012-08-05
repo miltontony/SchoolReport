@@ -41,18 +41,21 @@
             </div>
 
             <div >
-                <span class="likes">
-                    {{ user_report.like_count }} Like{{ user_report.like_count|pluralize }}
-                </span>
                     {% if user.is_authenticated %}
-                    <span class="tag">
-                        <a href="{% url comment_like user_report.pk %}">+Like</a>
+                        <a href="{% url comment_like user_report.pk %}">
+                        <span class="label label-info">
+                            {{ user_report.like_count }} Like{{ user_report.like_count|pluralize }}
+                        </span>
+                        </a>
+                    {% else %}
+                        <span class="label label-info">
+                            {{ user_report.like_count }} Like{{ user_report.like_count|pluralize }}
                         </span>
                     {% endif %}
                     {% if user.is_authenticated %}
-                    <span class="tag right">
-                        <a href="{% url comment_flag user_report.pk %}">Report</a>
-                    </span>
+                    <a href="{% url comment_flag user_report.pk %}">
+                        <span class="label label-important">Report</span>
+                    </a>
                     {% endif %}
             </div>
 
@@ -86,7 +89,7 @@
 
 
 
-<div class="wrap" id="comment_form">
+<div class="well" id="comment_form">
     {% get_comment_form for school as form %}
 
     <form action="{% comment_form_target %}" method="post">
@@ -101,9 +104,10 @@
         </div>
 
         <p>
-            <label for="form-school">Category</label>
+            <label for="form-school">What do you want to report?</label>
             {% include "form_field_errors_snippet.html" with form_field=form.category %}
-            <select name="school">
+            <select name="category">
+                <option value="">Please choose an option</option>
                 <option value="0">Maintenance</option>
                 <option value="1">Abuse</option>
                 <option value="2">Textbooks</option>
@@ -112,11 +116,12 @@
             </select><br/>
             Write your report:
             <br/>
-            <textarea id="id_comment" rows="10" cols="40" name="comment" class="span12"></textarea>
+            {% include "form_field_errors_snippet.html" with form_field=form.comment %}
+            <textarea id="id_comment" rows="4" name="comment" class="span11"></textarea>
         </p>
-        <p>
-            <input type="submit" name="post" value="Send" class="btn"/>
-        </p>
+        <div class="form-actions">
+            <input type="submit" name="post" value="Post" class="btn btn-primary"/>
+        </div>
     </form>
 
 </div>
