@@ -1,4 +1,8 @@
 from django.contrib import admin
 from schoolreport.models import UserProfile
 
-admin.site.register(UserProfile)
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'school')
+
+admin.site.register(UserProfile, UserProfileAdmin)
