@@ -14,12 +14,18 @@
 			<a class="brand" href="/">ScoolReport</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
+                    {% if not user.is_authenticated %}
 					<li class="">
 						<a href="/login">Login</a>
 					</li>
 					<li class="">
 						<a href="/join">Join</a>
 					</li>
+                    {% else %}
+                    <li class="">
+                        <a href="/logout/">Logout</a>
+                    </li>
+                    {% endif %}
 				</ul>
 			</div>
 		</div>
