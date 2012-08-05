@@ -1,5 +1,107 @@
 {% extends "base.html" %}
+{% load comments %}
 
 {% block content %}
 <div>Hello world!</div>
+
+<div>
+    <!-- school data -->
+</div>
+
+{% if user.is_authenticated %}
+<div id="user_report_list" class="comment_list">
+    {% for user_report in user_report_list.object_list %}
+        <div class="comment {% cycle 'even' 'odd' %}">
+            <div>
+                <!-- link to user profile -->
+                            Anon.
+                    <span class="subtext">
+                    - {{ user_report.submit_date|date:"D, j M Y, H:i" }}
+                </span>
+            </div>
+
+            <div>{% spaceless %}
+                {% if user_report.is_community_moderated %}
+                    <strong>Moderated:</strong> {{ user_report.community_moderation_flags.latest.reason }}
+                {% else %}
+                    {% if user_report.is_moderated %}
+                        <strong>Moderated:</strong> {{ user_report.moderation_flags.latest.reason }}
+                    {% else %}
+                        {{ user_report.comment }}
+                    {% endif %}
+                {% endif %}{% endspaceless %}
+            </div>
+
+            <div>
+                <span class="likes">
+                    {{ user_report.like_count }} Like{{ user_report.like_count|pluralize }}
+                </span>
+                    {% if user.is_authenticated %}
+                    <span class="tag">
+                        <a href="{% url comment_like user_report.pk %}">+Like</a>
+                        </span>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <span class="tag right">
+                        <a href="{% url comment_flag user_report.pk %}">Report</a>
+                    </span>
+                    {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<br/>
+
+<div id="pagination">
+    {% if user_report_list.has_previous %}
+        <span><a href="{% url article_detail_redo article.pk user_report_list.previous_page_number %}">Previous</a></span> |
+    {% else %}
+        <span>Previous</span> |
+    {% endif %}
+
+    <span class="current">
+        Page {{ user_report_list.number }} of {{ user_report_list.paginator.num_pages }}
+    </span>
+
+    {% if user_report_list.has_next %}
+        | <span><a href="{% url article_detail_redo article.pk user_report_list.next_page_number %}">Next</a></span>
+    {% else %}
+        | <span>Next</span>
+    {% endif %}
+</div>
+
+
+<br/>
+
+
+
+<div class="wrap" id="comment_form">
+    {% get_comment_form for school as form %}
+
+    <form action="{% comment_form_target %}" method="post">
+        {% csrf_token %}
+        <div style="display:none;">
+            {{ form.content_type }}
+            {{ form.object_pk }}
+            {{ form.timestamp }}
+            {{ form.security_hash }}
+            {{ form.honeypot }}
+            <input type="hidden" name="next" value="{{ school.get_absolute_url }}#user_report_list" />
+        </div>
+
+        <p>
+            Write your report:
+            <br/>
+            <div class="form-fields">
+            {{ form.comment }}
+            </div>
+        </p>
+        <p>
+            <input type="submit" name="post" value="Send" class="btn"/>
+        </p>
+    </form>
+
+</div>
+{% endif %}
 {% endblock %}

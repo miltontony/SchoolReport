@@ -140,7 +140,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'schoolreport',
     'django.contrib.admin',
-    'south'
+    'south',
+    'jmbocomments',
 )
 
 # A sample logging configuration. The only tangible logging
