@@ -17,4 +17,12 @@ To get up and running locally::
     (ve)$ ./manage.py createsuperuser
     (ve)$ ./manage.py runserver
 
+If you get this error:
+	unknown locale: UTF-8
+
+Try this::
+
+	(ve)$ export LC_CTYPE=en_US.UTF-8
+	(ve)$ export LC_ALL=en_US.UTF-8
+
 Good luck!
