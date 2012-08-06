@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage
 from schoolreport.models import School
 from jmbocomments.models import UserComment
+from django.http import HttpResponse
 
 
 @login_required
@@ -40,3 +41,7 @@ def home(request, page=1):
         'school': school,
         'user_report_list': user_report_list,
         })
+
+
+def health(request):
+    return HttpResponse("")

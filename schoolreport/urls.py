@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic.simple import redirect_to
 from django.conf import settings
 
 from django.contrib import admin
@@ -15,6 +16,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^schoolreport/comments/', include('jmbocomments.urls')),
+
+    url(r'^health/', 'schoolreport.views.health', name='health'),
+    url(r'^cgi-sys/defaultwebpage.cgi$', redirect_to, {'url': '/'}),
 )
 
 
