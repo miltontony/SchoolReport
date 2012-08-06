@@ -1,3 +1,5 @@
 Django
 South==0.7.3
 -e git+git://github.com/miltontony/jmbo-comments.git@develop#egg=jmbo-comments
+supervisor==3.0a10
+gunicorn==0.13.4
