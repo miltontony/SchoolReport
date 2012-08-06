@@ -8,7 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'schoolreport.views.home', name='home'),
     url(r'^$', 'schoolreport.views.home', name='index'),
-    url(r'^/page/(?P<page>\d+)/$', 'schoolreport.views.home', name='home'),
+    url(r'^page/(?P<page>\d+)/$', 'schoolreport.views.home', name='home'),
     url(r'^join/$', 'schoolreport.auth.join', name='join'),
     url(r'^login/$', 'schoolreport.auth.login', name='login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
