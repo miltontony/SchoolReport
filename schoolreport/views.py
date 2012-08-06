@@ -1,5 +1,6 @@
 # Create your views here.
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage
@@ -9,7 +10,12 @@ from jmbocomments.models import UserComment
 
 @login_required
 def home(request, page=1):
-    school = School.objects.get(emis=int(request.user.get_profile().school))
+    school_id = request.user.get_profile().school
+
+    if not school_id:
+        return redirect(reverse('logout'))
+
+    school = School.objects.get(emis=int(school_id))
     article_content_type = ContentType.objects.get_for_model(School)
 
     user_report_qs = UserComment.objects\
