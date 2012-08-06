@@ -64,6 +64,7 @@
 </div>
 <br/>
 
+{% if user_report_list.object_list.exists %}
 <div class="well" style="padding: 5px">
 <div id="pagination">
     {% if user_report_list.has_previous %}
@@ -83,7 +84,7 @@
     {% endif %}
 </div>
 </div>
-
+{% endif %}
 
 <br/>
 
