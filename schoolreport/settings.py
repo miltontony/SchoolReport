@@ -97,6 +97,7 @@ INSTALLED_APPS = (
     'schoolreport',
     'south',
     'django.contrib.comments',
+    'gunicorn',
 )
 
 COMMENTS_APP = 'jmbocomments'
