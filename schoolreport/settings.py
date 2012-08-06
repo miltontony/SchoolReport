@@ -16,7 +16,7 @@ LOGIN_REDIRECT_URL = '/'
 ROOT_URLCONF = 'schoolreport.urls'
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Milton', 'madandat@gmail.com'),
 )
 MANAGERS = ADMINS
 
