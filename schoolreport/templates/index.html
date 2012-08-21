@@ -3,14 +3,27 @@
 
 {% block content %}
 <div class="row">
+	<div class="span12">
+		<h1>{{school.name}}</h1>
+	</div>
+</div>
+<div class="row">
     <span class="span4">
     <img src="http://maps.googleapis.com/maps/api/staticmap?center={{school.latitude}},{{school.longitude}}&amp;markers=color:blue|label:S|{{school.latitude}},{{school.longitude}}&amp;zoom=12&amp;size=320x240&amp;sensor=false&amp;"/>
     </span>
     <span class="span6">
-    School: {{school.name}} <br/>
-    Average Fees: {{school.fee}} <br/>
-    Principal: {{school.principal}} <br/>
-    Address: {{school.physical_address}}
+    <h3>Address</h3> 
+    {{school.physical_address}}
+    <h3>Telephone</h3>
+    {{school.telephone}}
+    <h3>Principal</h3> 
+    {{school.principal}}
+    <h3>District</h3>
+    {{school.district}}
+    <h3>Language</h3>
+    {{school.language}}
+    <h3>Average Fees</h3> 
+    {{school.fee}}
     </span>
 </div>
 
