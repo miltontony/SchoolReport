@@ -2,8 +2,8 @@
 {% load comments %}
 
 {% block content %}
-<div class="row">
-	<div class="span12">
+<div class="row margin-bottom">
+	<div class="span12 underline">
 		<h1>{{school.name}}</h1>
 	</div>
 </div>
@@ -12,20 +12,101 @@
     <img src="http://maps.googleapis.com/maps/api/staticmap?center={{school.latitude}},{{school.longitude}}&amp;markers=color:blue|label:S|{{school.latitude}},{{school.longitude}}&amp;zoom=12&amp;size=320x240&amp;sensor=false&amp;"/>
     </span>
     <span class="span6">
+    {% if school.physical_address %}
     <h3>Address</h3> 
     {{school.physical_address}}
+    {% endif %}
+    {% if school.telephone %}
     <h3>Telephone</h3>
     {{school.telephone}}
+    {% endif %}
+    {% if school.principal %}
     <h3>Principal</h3> 
     {{school.principal}}
+    {% endif %}
+    {% if school.district %}
     <h3>District</h3>
     {{school.district}}
+    {% endif %}
+    {% if school.circuit %}
+    <h3>Circuit</h3>
+    {{school.circuit}}
+    {% endif %}
+    {% if school.language %}
     <h3>Language</h3>
     {{school.language}}
+    {% endif %}
+    {% if school.fee %}
     <h3>Average Fees</h3> 
     {{school.fee}}
+    {% endif %}
     </span>
 </div>
+
+<div class="row">
+	<span class="span6">
+		<h2 class="underline margin-bottom">Class Size</h2>
+		<div clas="row">
+			<span class="span1">
+				<img src="{{ STATIC_URL }}images/icon-class_size.png" />
+			</span>
+			<span class="span4 underline">
+				{{school.students}} learners<br />
+				{{school.teachers}} educators
+			</span>
+			<span class="span4">
+				<h3>{{ learner_ratio }}:1</h3>
+			</span>
+		</div>
+	</span>
+	
+	<span class="span6">
+		<h2 class="underline margin-bottom">Provincial Class Size</h2>
+		<div clas="row">
+			<span class="span1">
+				<img src="{{ STATIC_URL }}images/icon-class_size.png" />
+			</span>
+			<span class="span4 underline">
+				{{ ave_learner_ratio.students__avg|floatformat:0 }} learners<br />
+				{{ ave_teacher_ratio.teachers__avg|floatformat:0 }} educators<br />
+			</span>
+			<span class="span4">
+				<h3>{{ ave_ratio|floatformat:0 }}:1</h3>
+			</span>
+		</div>
+	</span>
+</div>
+
+<div class="row">
+	<span class="span6">
+		<h2 class="underline margin-bottom">Pass Rate</h2>
+		<div clas="row">
+			<span class="span1">
+				<img src="{{ STATIC_URL }}images/icon-pass_rate.png" />
+			</span>
+			<span class="span4">
+				2011: <span class="big bold">{{ school.passrate_2011 }}%</span><br />
+				2010: <span class="big bold">{{ school.passrate_2010 }}%</span><br />
+				2009: <span class="big bold">{{ school.passrate_2009 }}%</span><br />
+			</span>
+		</div>
+	</span>
+	
+	<span class="span6">
+		<h2 class="underline margin-bottom">Provincial Pass Rate</h2>
+		<div clas="row">
+			<span class="span1">
+				<img src="{{ STATIC_URL }}images/icon-pass_rate.png" />
+			</span>
+			<span class="span4">
+				2011: <span class="big bold">{{ ave_passrate_2011|floatformat }}%</span><br />
+				2010: <span class="big bold">{{ ave_passrate_2010|floatformat }}%</span><br />
+				2009: <span class="big bold">{{ ave_passrate_2009|floatformat }}%</span><br />
+			</span>
+		</div>
+	</span>
+</div>
+
 
 {% if user.is_authenticated %}
 <div class="row">
