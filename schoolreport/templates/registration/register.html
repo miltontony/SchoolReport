@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script>
+	$(function() {
+		$("#province-select").change(function() {
+			var pid=$(this).val();
+			$.getJSON("/schoollist", { province: pid }, function(data) {
+				$("#school-select").empty();
+				_.each(data, function(item) {
+					$("#school-select").append("<option value='"+item.emis+"'>"+item.name+"</option>");
+				});
+			});
+		});
+	});
+</script>
 <div class="row">
 	<div class="span4 offset4">
 		<h2>Join</h2>
@@ -11,22 +24,26 @@
 	<div class="span4 offset4">
     	<form class="content-form well" method="post">
     	<fieldset>
+    		<label for='form-province'>Province</label>
+    		<select name="school" id="province-select">
+	            <option value="WC">Western Cape</option>
+	            <option value="GT">Gauteng</option>
+	            <option value="EC">Eastern Cape</option>
+				<option value="FS">Free State</option>
+				<option value="KZ">KwaZulu-Natal</option>
+				<option value="LP">Limpopo</option>
+				<option value="MP">Mpumalanga</option>
+				<option value="NC">Northern Cape</option>
+				<option value="NW">North-West</option>
+            </select>
     	    <label for="form-school">School</label>
     	    {% include "form_field_errors_snippet.html" with form_field=form.school %}
-            <select name="school">
-                <option value="100000031">ATLANTIC BEACH COLLEGE</option>
-                <option value="100000036">KNYSNA CHRISTIAN MISSION SCHOOL</option>
-                <option value="100000037">EAGLE'S NEST CHRISTIAN PRIM.</option>
-                <option value="100000038">SILVERMINE ACADEMY</option>
-                <option value="103008402">SHELANTI PRIVATE SCHOOL</option>
-                <option value="103008403">PHYLLIS JOWELL JEWISH DAY SCHOOL</option>
-                <option value="105008404">THE LEADERSHIP COLLEGE</option>
-                <option value="106008397">ZENZELENI SCHOOL FOR CREATIVE EDUCATION</option>
-                <option value="106008405">ST. MICHAELS PRIM.(KHAYELITSHA)</option>
-                <option value="19008399">BAY COLLEGE</option>
-                <option value="124008401">FOUNDATION CHRISTIAN SCHOOL</option>
-                <option value="132008406">DASSENBERG WALDORF SCHOOL</option>
-                <option value="140008400">BUFFELSRIVIER PRIVATE PRIM.</option>
+            <select name="school" id="school-select">
+            	{% for school in schools %}
+            	{% if school.name %}
+	            	<option value="{{ school.emis }}">{{ school.name }}</option>
+	            {% endif %}
+            	{% endfor %}
             </select>
     	    <label for="form-username">Mobile Number</label>
     	    {% include "form_field_errors_snippet.html" with form_field=form.username %}

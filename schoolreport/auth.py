@@ -6,7 +6,10 @@ from django.contrib.auth import (REDIRECT_FIELD_NAME, login as auth_login,
 from django.contrib.auth.forms import AuthenticationForm
 from schoolreport.utils import process_post_data_username
 from schoolreport.forms import MobiUserCreationForm
-
+from schoolreport.models import School
+from django.db.models import Count
+from django.utils import simplejson
+from django.http import HttpResponse
 
 def login(request, template_name='registration/login.html',
           redirect_field_name=REDIRECT_FIELD_NAME,
@@ -44,6 +47,17 @@ def login(request, template_name='registration/login.html',
     return render(request, template_name,
               {'form': form, redirect_field_name: redirect_to})
 
+def schoollist(request):
+	province = request.GET.get('province')
+        if not province:
+            province="WC"
+	schools = School.objects.order_by("name").filter(province=province)
+	result = []
+	for school in schools:
+		result.append({ 'emis': school.emis, 'name': school.name})
+	data = simplejson.dumps(result)
+	return HttpResponse(data, mimetype='application/json')
+	
 def join(request):
     if request.method == 'POST':
         post_data = process_post_data_username(request.POST)
@@ -64,5 +78,5 @@ def join(request):
             return redirect(reverse('home'))
     else:
         form = MobiUserCreationForm()
-
-    return render(request, 'registration/register.html', {'form': form})
+    schools = School.objects.order_by("name").filter(province="WC")
+    return render(request, 'registration/register.html', {'form': form, 'schools':schools,})
