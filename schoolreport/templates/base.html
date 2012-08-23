@@ -4,6 +4,8 @@
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css" />
+    <script src="{{ STATIC_URL }}jquery/jquery-1.7.2.min.js"></script>
+    <script src="{{ STATIC_URL }}underscore/underscore-min.js"></script>
     <title>SchoolReport</title>
 </head>
 <body>
@@ -17,6 +19,9 @@
 	<div class="navbar-inner">
 		<div class="nav-collapse collapse">
 			<ul class="nav">
+				<li class="">
+		    		<a href="/browse">Browse</a>
+		    	</li>
                 {% if not user.is_authenticated %}
 		    	<li class="">
 		    		<a href="/login">Login</a>

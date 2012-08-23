@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script>
+	$(function() {
+		$("#province-select").change(function() {
+			var pid=$(this).val();
+			$.getJSON("/schoollist", { province: pid }, function(data) {
+				$("#school-select").empty();
+				$("#school-select").append("<option value='-1'>Select a school...</option>");
+				_.each(data, function(item) {
+					$("#school-select").append("<option value='"+item.emis+"'>"+item.name+"</option>");
+				});
+			});
+		});
+		
+		$("#school-select").change(function() {
+			var emis=$(this).val();
+			if (emis==-1) return;
+			location.href="/school/?emis="+emis;
+		});
+	});
+</script>
+<div class="row">
+	<div class="span4 offset4">
+		<h2>Join</h2>
+		<p>Join our network and improve your school.</p>
+    </div>
+</div>
+<div class="row">
+	<div class="span4 offset4">
+    	<form class="content-form well" method="post">
+    	<fieldset>
+    		<label for='form-province'>Province</label>
+    		<select name="school" id="province-select">
+	            <option value="WC">Western Cape</option>
+	            <option value="GT">Gauteng</option>
+	            <option value="EC">Eastern Cape</option>
+				<option value="FS">Free State</option>
+				<option value="KZ">KwaZulu-Natal</option>
+				<option value="LP">Limpopo</option>
+				<option value="MP">Mpumalanga</option>
+				<option value="NC">Northern Cape</option>
+				<option value="NW">North-West</option>
+            </select>
+    	    <label for="form-school">School</label>
+    	    {% include "form_field_errors_snippet.html" with form_field=form.school %}
+            <select name="school" id="school-select">
+            	<option value='-1'>Select a school...</option>
+            	{% for school in schools %}
+            	{% if school.name %}
+	            	<option value="{{ school.emis }}">{{ school.name }}</option>
+	            {% endif %}
+            	{% endfor %}
+            </select>
+        </fieldset>
+        </form>
+    </div>
+</div>
+{% endblock %}
