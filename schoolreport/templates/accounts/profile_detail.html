@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %} | {{ nickname }}'s profile{% endblock %}
+
+{% block content %}
+<h2>{{ nickname }}'s Profile</h2>
+
+<form method="post" action="">
+	{% csrf_token %}
+
+
+	<p>
+		<strong>Nickname:</strong><br />
+		{% if editable %}
+			<input type="text" name="nickname" value="{{ nickname }}"/>
+		{% else %}
+			{{ nickname }}
+		{% endif %}
+	</p>
+
+	<p>
+		<strong>Member since:</strong><br/>
+		{{ profile_user.date_joined|date:"D, j M Y" }}
+
+	</p>
+
+	{% if editable %}
+	<p><input type="submit" value="Save"></p>
+	{% endif %}
+</form>
+{% endblock %}

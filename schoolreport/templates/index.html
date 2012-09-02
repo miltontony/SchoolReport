@@ -13,7 +13,7 @@
     </span>
     <span class="span6">
     {% if school.physical_address %}
-    <h3>Address</h3> 
+    <h3>Address</h3>
     {{school.physical_address}}
     {% endif %}
     {% if school.telephone %}
@@ -21,7 +21,7 @@
     {{school.telephone}}
     {% endif %}
     {% if school.principal %}
-    <h3>Principal</h3> 
+    <h3>Principal</h3>
     {{school.principal}}
     {% endif %}
     {% if school.district %}
@@ -37,7 +37,7 @@
     {{school.language}}
     {% endif %}
     {% if school.fee %}
-    <h3>Average Fees</h3> 
+    <h3>Average Fees</h3>
     {{school.fee}}
     {% endif %}
     </span>
@@ -59,7 +59,7 @@
 			</span>
 		</div>
 	</span>
-	
+
 	<span class="span6">
 		<h2 class="underline margin-bottom">Provincial Class Size</h2>
 		<div clas="row">
@@ -91,7 +91,7 @@
 			</span>
 		</div>
 	</span>
-	
+
 	<span class="span6">
 		<h2 class="underline margin-bottom">Provincial Pass Rate</h2>
 		<div clas="row">
@@ -114,15 +114,21 @@
     {% for user_report in user_report_list.object_list %}
 
             <div class="well" style="margin:10px 0">
-                <!-- link to user profile -->
-                            Anon.
-                    <span class="subtext">
-                    - {{ user_report.submit_date|date:"D, j M Y, H:i" }}
-                </span>
-                :: {{user_report.get_category}}
+                <span class="subtext">{{ user_report.submit_date|timesince }} ago</span>
+                 ||
+                <a href="{% url accounts_profile user_report.user.pk %}">
+                    <strong>
+                        {% if user_report.user.get_full_name %}
+                            {{ user_report.user.get_full_name }}
+                        {% else %}
+                            Anon
+                        {% endif %}
+                    </strong>
+                </a> says:
             </div>
 
             <div>{% spaceless %}
+                :: {{user_report.get_category}} :: <br/>
                 {% if user_report.is_community_moderated %}
                     <strong>Moderated:</strong> {{ user_report.community_moderation_flags.latest.reason }}
                 {% else %}
