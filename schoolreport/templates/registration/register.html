@@ -41,7 +41,7 @@
             <select name="school" id="school-select">
             	{% for school in schools %}
             	{% if school.name %}
-	            	<option value="{{ school.emis }}">{{ school.name }}</option>
+	            	<option value="{{ school.emis }}">{{ school.name }} - {{ school.physical_address|truncatechars:20}}</option>
 	            {% endif %}
             	{% endfor %}
             </select>
