@@ -5,7 +5,10 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User')
-    school = models.TextField(default='')
+    school = models.IntegerField()
+
+    def can_report(self, emis):
+        return emis == self.school
 
 class School(models.Model):
 	emis = models.IntegerField(unique = True)

@@ -23,11 +23,11 @@ def home(request, page=1):
     ave_learner_ratio = School.objects.filter(province=province).values('province').annotate(Avg('students'))[0]
     ave_teacher_ratio = School.objects.filter(province=province).values('province').annotate(Avg('teachers'))[0]
     ave_ratio = ave_learner_ratio.values()[1] / ave_teacher_ratio.values()[1]
-    
+
     ave_passrate_2009 = School.objects.filter(province=province, passrate_2009__gt=0).values('province').annotate(Avg('passrate_2009'))[0].values()[1]
     ave_passrate_2010 = School.objects.filter(province=province, passrate_2009__gt=0).values('province').annotate(Avg('passrate_2010'))[0].values()[1]
     ave_passrate_2011 = School.objects.filter(province=province, passrate_2009__gt=0).values('province').annotate(Avg('passrate_2011'))[0].values()[1]
-    
+
     article_content_type = ContentType.objects.get_for_model(School)
 
     user_report_qs = UserComment.objects\
@@ -63,7 +63,7 @@ def home(request, page=1):
 def browse(request):
 	schools = School.objects.order_by("name").filter(province="WC")
 	return render(request, 'browse.html', {'schools':schools,})
-	
+
 def school(request, page=1):
     emis=request.GET.get("emis")
     school = School.objects.get(emis=int(emis))
@@ -72,11 +72,11 @@ def school(request, page=1):
     ave_learner_ratio = School.objects.filter(province=province).values('province').annotate(Avg('students'))[0]
     ave_teacher_ratio = School.objects.filter(province=province).values('province').annotate(Avg('teachers'))[0]
     ave_ratio = ave_learner_ratio.values()[1] / ave_teacher_ratio.values()[1]
-    
+
     ave_passrate_2009 = School.objects.filter(province=province, passrate_2009__gt=0).values('province').annotate(Avg('passrate_2009'))[0].values()[1]
     ave_passrate_2010 = School.objects.filter(province=province, passrate_2009__gt=0).values('province').annotate(Avg('passrate_2010'))[0].values()[1]
     ave_passrate_2011 = School.objects.filter(province=province, passrate_2009__gt=0).values('province').annotate(Avg('passrate_2011'))[0].values()[1]
-    
+
     article_content_type = ContentType.objects.get_for_model(School)
 
     user_report_qs = UserComment.objects\
@@ -107,6 +107,7 @@ def school(request, page=1):
         'ave_passrate_2009': ave_passrate_2009,
         'ave_passrate_2010': ave_passrate_2010,
         'ave_passrate_2011': ave_passrate_2011,
+        'can_report': request.user.get_profile().can_report(int(emis))
         })
 
 def health(request):

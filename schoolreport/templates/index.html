@@ -189,7 +189,7 @@
 <br/>
 
 
-
+{% if can_report %}
 <div class="well" id="comment_form">
     {% get_comment_form for school as form %}
 
@@ -226,5 +226,6 @@
     </form>
 
 </div>
+{% endif %}
 {% endif %}
 {% endblock %}
